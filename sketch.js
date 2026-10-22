@@ -18,6 +18,7 @@ const WAIT_TIME = 1500;
 const PROMPT_TIME = 4000;
 const RESULT_TIME = 2500;
 
+//Add Simon Says rule to the prompts
 const prompts = [
   { text: "Simon says raise your left hand", action: "leftHandUp", simonSays: true },
   { text: "Raise your right hand", action: "rightHandUp", simonSays: false },
@@ -224,6 +225,7 @@ function drawTimer() {
 }
 
 function drawFeedback() {
+  
   //Evaluate the Simon Says rule
   let isCorrect = currentPrompt.simonSays === actionDetected;
 

@@ -234,7 +234,7 @@ function drawFeedback() {
   if (isCorrect) {
     fill(120, 255, 160);
     textAlign(CENTER, TOP);
-    textSize(36);
+    textSize(30);
     text("CORRECT MOVEMENT DETECTED", width / 2, 60);
 
     fill(255);
@@ -243,21 +243,21 @@ function drawFeedback() {
     if (currentPrompt.simonSays) {
       text("The system recognized the requested pose.", width / 2, 140);
     } else {
-      text("Correct! You did not perform the requested pose.", width / 2, 140);
+      text("Correct! You followed Simon Says Rule.", width / 2, 140);
     }
   }
   else {
     fill(255, 130, 130);
     textAlign(CENTER, TOP);
-    textSize(36);
+    textSize(30);
     text("INCORRECT MOVEMENT DETECTED", width / 2, 60);
     fill(255);
     textSize(16);
-    
+
     if (currentPrompt.simonSays) {
       text("The system did not recognize the requested pose.", width / 2, 140);
     } else {
-      text("Incorrect! You performed the requested pose.", width / 2, 140);
+      text("Incorrect! You did not follow Simon Says Rule.", width / 2, 140);
     }
   }
   fill(255);

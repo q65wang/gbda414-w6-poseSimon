@@ -232,7 +232,7 @@ function drawFeedback() {
     fill(120, 255, 160);
     textAlign(CENTER, TOP);
     textSize(36);
-    text("COMPLIANCE DETECTED", width / 2, 60);
+    text("CORRECT MOVEMENT DETECTED", width / 2, 60);
 
     fill(255);
     textSize(16);
@@ -241,7 +241,7 @@ function drawFeedback() {
     fill(255, 130, 130);
     textAlign(CENTER, TOP);
     textSize(36);
-    text("NON-COMPLIANCE DETECTED", width / 2, 60);
+    text("INCORRECT MOVEMENT DETECTED", width / 2, 60);
 
     fill(255);
     textSize(16);

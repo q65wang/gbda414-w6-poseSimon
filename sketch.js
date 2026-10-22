@@ -7,21 +7,21 @@ let lastPoseTime = -10000;
 
 // State-machine data controls which screen is shown and for how long.
 let currentState = "WAITING";
-let currentPrompt = null;
+let currentPrompt = null
 let stateStartTime = 0;
 
 // Stays true after the requested gesture is first detected during a prompt.
 let actionDetected = false;
-let simonSays = true; // Set to false to disable the "Simon Says" rule.
 
+//Timing
 const WAIT_TIME = 1500;
 const PROMPT_TIME = 4000;
 const RESULT_TIME = 2500;
 
 const prompts = [
-  { text: "Raise your left hand", action: "leftHandUp" },
-  { text: "Raise your right hand", action: "rightHandUp" },
-  { text: "Raise both hands", action: "bothHandsUp" },
+  { text: "Simon says raise your left hand", action: "leftHandUp", simonSays: true },
+  { text: "Raise your right hand", action: "rightHandUp", simonSays: false },
+  { text: "Simon says raise both hands", action: "bothHandsUp", simonSays: true },
 ];
 
 function preload() {
@@ -224,11 +224,14 @@ function drawTimer() {
 }
 
 function drawFeedback() {
+  //Evaluate the Simon Says rule
+  let isCorrect = currentPrompt.simonSays === actionDetected;
+
   // Draw the result panel. Customize the wording and appearance in both branches.
   fill(0, 190);
   rect(20, 20, width - 40, 220, 14);
 
-  if (actionDetected) {
+  if (isCorrect) {
     fill(120, 255, 160);
     textAlign(CENTER, TOP);
     textSize(36);
@@ -236,18 +239,27 @@ function drawFeedback() {
 
     fill(255);
     textSize(16);
-    text("The system recognized the requested pose.", width / 2, 140);
-  } else {
+
+    if (currentPrompt.simonSays) {
+      text("The system recognized the requested pose.", width / 2, 140);
+    } else {
+      text("Correct! You did not perform the requested pose.", width / 2, 140);
+    }
+  }
+  else {
     fill(255, 130, 130);
     textAlign(CENTER, TOP);
     textSize(36);
     text("INCORRECT MOVEMENT DETECTED", width / 2, 60);
-
     fill(255);
     textSize(16);
-    text("The system did not recognize the requested pose.", width / 2, 140);
+    
+    if (currentPrompt.simonSays) {
+      text("The system did not recognize the requested pose.", width / 2, 140);
+    } else {
+      text("Incorrect! You performed the requested pose.", width / 2, 140);
+    }
   }
-
   fill(255);
   textSize(16);
   text("Prompt: " + currentPrompt.text, width / 2, 190);
